@@ -1,0 +1,10 @@
+// Spisok materialov za period
+
+SELECT     t12.T12F02, t12.T12F03 AS CENA, SUM(t12.T12F04 * t11.T11F06K) AS KOLVO, SUM(t12.T12F03 * t12.T12F04 * t11.T11F06K) AS SUMMA, t11.R_SHIFR1, n.N_MAT01, 
+                      n.eizm
+FROM         RS_T12 t12 LEFT OUTER JOIN
+                      RS_T11 t11 ON t11.N_ZAK = t12.N_ZAK LEFT OUTER JOIN
+                      N_MAT n ON t12.T12F02 = n.N_MAT00
+WHERE     (t12.N_RAB00 = - 1) AND (t11.T11F05 >= '01.01.2019') AND (t11.T11F05 <= '05.01.2019') AND (n.N_ZAV = 3)
+GROUP BY t12.T12F02, t12.T12F03, t11.R_SHIFR1, n.N_MAT01, n.eizm
+ORDER BY t11.R_SHIFR1

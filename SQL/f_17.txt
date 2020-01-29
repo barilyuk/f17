@@ -1,0 +1,143 @@
+CREATE PROCEDURE F17_ALL1 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (e.Perv<3)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_ALL2 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (e.Perv>2)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_D181 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 5) and (e.Perv<3)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_D182 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 5) and (e.Perv>2)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_IV1 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM,  COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 1) AND(e.Perv<3)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_IV2 (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM,  COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 1) AND(e.Perv>2)
+GROUP BY a.NAME, a.NOM
+GO
+
+
+CREATE PROCEDURE F17_ALL_SUM (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, SUM(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) 
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_D18_SUM (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM, SUM(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 5)
+GROUP BY a.NAME, a.NOM
+GO
+
+CREATE PROCEDURE F17_IV_SUM (
+@Nach datetime,
+@Kon datetime)
+AS
+SELECT     a.NAME, a.NOM,  SUM(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= @Nach) AND (b.T11F04 <= @Kon) AND (d.S03F00 = 1)
+GROUP BY a.NAME, a.NOM
+GO
+
+
+DROP TABLE t11_temp;
+SELECT     N_KAR, COUNT(N_KAR) AS Perv
+INTO            T11_temp
+FROM         RS_T11
+WHERE     (N_ZAV = 3)
+GROUP BY N_KAR
+
+
+SELECT     a.NAME, a.NOM, COUNT(b.T11F06K) AS Expr1
+FROM         KX a INNER JOIN
+                      RS_T11 b ON a.KOD = b.R_KX1 INNER JOIN
+                      RS_T01 c ON c.T01F04 = b.T01F04 INNER JOIN
+                      S03 d ON d.S03F00 = c.S03F00 INNER JOIN
+                      T11_temp e ON e.N_KAR = b.N_KAR
+WHERE     (b.N_ZAV = 3) AND (b.T11F04 >= '01.01.06') AND (b.T11F04 <= '01.01.07') AND (e.Perv > 2)
+GROUP BY a.NAME, a.NOM
